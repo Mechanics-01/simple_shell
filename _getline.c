@@ -3,7 +3,7 @@
 /**
  * _getline - Custom getline function.
  * @line_buff: Pointer to the buffer where the line will be stored.
- * Return: The number of bytes read (including newline), or EOF if there's
+ * Return: The number of bytes read (including newline), or End-of-file (EOF) if there's
  * an error or end of file is reached.
  */
 ssize_t _getline(char **line_buff)

@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
- * free_commands - Free memory allocated for an array of strings
- * @commands: The array of strings to be freed
+ * free_commands - Memories are freely allocated for an array of strings
+ * @commands: It commands the  array of strings to be freed
  */
 
 void free_commands(char **commands)
