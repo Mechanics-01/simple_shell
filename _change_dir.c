@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * change_d - Change the current working directory
+ * change_d - Change the currents working directories
  * @d: The target directory
  */
 void change_d(char *d)

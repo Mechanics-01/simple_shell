@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * exe_comd - Execute a command
+ * exe_comd - It Execute a command
  * @input: The command input
  * @av: The array of arguments
  * Return: 0 on success, -1 on failure

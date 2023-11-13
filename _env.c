@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * env - Print environment variables
+ * env - It Print environment variables
  * @envp: The array of environment variables
  * Return: Always 0
  */
