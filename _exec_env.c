@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * exec_env - Execute environment-related commands
+ * exec_env - It Execute environment-related commands
  * @argv: The array of command-line arguments
  * Return: Always 0
  */

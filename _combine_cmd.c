@@ -2,7 +2,7 @@
 
 /**
  * parse_commands - Parse input string into an array of commands
- * @input: The input string containing multiple commands
+ * @input: The input strings contains multiple commands
  * Return: An array of strings representing commands
  */
 char **parse_commands(char *input)
