@@ -15,22 +15,18 @@ int exe_comd(char *input, char *av[])
 	{
 		char *command = commands[i];
 		char *argv[100];
-		int j = 0, exit_s;
+		int j = 0, exit_s = 0;
 		char *tok_str = strtok(command, " ");
 
-		while (tok_str != NULL)
+		if (tok_str == NULL)
 		{
-			argv[j++] = tok_str;
-			tok_str = strtok(NULL, " ");
+			i++;
+			continue;
 		}
-		argv[j] = NULL;
 
-		if (strcmp(argv[0], "exit") == 0 && argv[1] != NULL)
-		{
-			exit_s = atoi(argv[1]);
-			exit(exit_s);
-		}
-		else if ((strcmp(argv[0], "setenv") == 0) ||
+		break_exec(argv, tok_str, j, exit_s);
+
+		if ((strcmp(argv[0], "setenv") == 0) ||
 		(strcmp(argv[0], "unsetenv") == 0))
 		{
 			exec_env(argv);
@@ -49,6 +45,31 @@ int exe_comd(char *input, char *av[])
 	free(commands);
 	return (0);
 }
+
+/**
+ * break_exec - Breaks down the command string
+ * into arguments and handles exit
+ * @argv: The array to store command arguments
+ * @tok_str: The command string to break down
+ * @j: Index to keep track of arguments
+ * @exit_s: Exit status variable
+ */
+void break_exec(char *argv[], char *tok_str, int j, int exit_s)
+{
+	while (tok_str != NULL)
+	{
+		argv[j++] = tok_str;
+		tok_str = strtok(NULL, " ");
+	}
+	argv[j] = NULL;
+
+	if (strcmp(argv[0], "exit") == 0 && argv[1] != NULL)
+	{
+		exit_s = atoi(argv[1]);
+		exit(exit_s);
+	}
+}
+
 
 /**
  * path_exec - Execute a command with the provided path
@@ -78,13 +99,13 @@ void path_exec(char *argv[], char *av[], char *input)
 			if (execve(path, argv, NULL) == -1)
 			{
 				perror(av[0]);
-				exit(1);
+				exit(EXIT_FAILURE);
 			}
 		}
 		else
 		{
 			/* Parent process */
-			wait(&status);
+			waitpid(c_pid, &status, 0);
 			free(path);
 		}
 	}
@@ -93,7 +114,7 @@ void path_exec(char *argv[], char *av[], char *input)
 		if (isatty(STDIN_FILENO) == 0)
 		{
 			fprintf(stderr, "%s: %d: %s: %s\n", av[0], 1, argv[0], "not found");
-			_exit(127);
+			_exit(EXIT_FAILURE);
 		}
 		perror(av[0]);
 	}

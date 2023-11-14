@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdbool.h>
+#include <fcntl.h>
 
 #define BUFFER 1050
 #define COMMAND_SIZE 100
@@ -28,5 +29,8 @@ void free_commands(char **commands);
 char **parse_commands(char *input);
 void check_env(int env_index, int overwrite, char *new_env);
 void path_exec(char *argv[], char *av[], char *input);
+void check_non_interactive(char *line_buff, int ac, char *av[], char *envp[]);
+void check_buff(char *line_buff, char *av[], char *envp[]);
+void break_exec(char *argv[], char *tok_str, int j, int exit_s);
 
 #endif/*SHELL_H*/

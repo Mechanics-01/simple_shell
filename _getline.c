@@ -21,23 +21,30 @@ ssize_t _getline(char **line_buff)
 		else if (buff_size == 0)
 			return (EOF);
 	}
-	while (buff_size > 0 && buff[line_len] != '\n')
+	while (buff_size > 0)
+	{
+		if (buff[line_len] == '\n')
+			break;
 		line_len++;
-
+	}
 	*line_buff = malloc(line_len + 1);
 	if (*line_buff == NULL)
 	{
 		perror("malloc");
 		exit(1);
 	}
-	for (i = 0; i < line_len; i++)
-		(*line_buff)[i] = buff[i];
-	(*line_buff)[line_len] = '\0';
-
-	buff_size -= (line_len + 1);
-	for (i = 0; i < buff_size; i++)
+	if (line_len > 0)
 	{
-		buff[i] = buff[line_len + i];
+		for (i = 0; i < line_len; i++)
+			(*line_buff)[i] = buff[i];
+		(*line_buff)[line_len] = '\0';
 	}
+	if (buff_size - line_len - 1 > 0)
+	{
+		buff_size -= (line_len + 1);
+		memmove(buff, buff + line_len + 1, buff_size);
+	}
+	else
+		buff_size = 0;
 	return (line_len);
 }
