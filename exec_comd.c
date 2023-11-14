@@ -95,7 +95,6 @@ void path_exec(char *argv[], char *av[], char *input)
 
 		if (c_pid == 0)
 		{
-			/* Child process */
 			if (execve(path, argv, NULL) == -1)
 			{
 				perror(av[0]);
@@ -104,7 +103,6 @@ void path_exec(char *argv[], char *av[], char *input)
 		}
 		else
 		{
-			/* Parent process */
 			waitpid(c_pid, &status, 0);
 			free(path);
 		}
