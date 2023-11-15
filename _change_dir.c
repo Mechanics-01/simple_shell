@@ -13,7 +13,7 @@ void change_d(char *d)
 	{
 		directory = _getenv("HOME");
 	}
-	else if (strcmp(d, "-") == 0)
+	else if (_strcmp(d, "-") == 0)
 	{
 		directory = _getenv("OLDPWD");
 	}

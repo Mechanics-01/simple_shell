@@ -11,7 +11,7 @@ char *get_loc(char *arg)
 
 	if (arg[0] == '/')
 	{
-		path = strdup(arg);
+		path = _strdup(arg);
 		if (access(path, X_OK) == 0)
 			return (path);
 		free(path);

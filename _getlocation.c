@@ -13,18 +13,18 @@ char *location(char *path, char *arg)
 	char *filepath;
 	char *delim = ":";
 
-	path_cpy = strdup(path);
+	path_cpy = _strdup(path);
 
 	path_token = strtok(path_cpy, delim);
 
-	filepath = malloc(strlen(arg) + strlen(path_token) + 2);
+	filepath = malloc(_strlen(arg) + _strlen(path_token) + 2);
 
 	while (path_token != NULL)
 	{
-		strcpy(filepath, path_token);
-		strcat(filepath, "/");
-		strcat(filepath, arg);
-		strcat(filepath, "\0");
+		_strcpy(filepath, path_token);
+		_strcat(filepath, "/");
+		_strcat(filepath, arg);
+		_strcat(filepath, "\0");
 
 		if (access(filepath, X_OK) == 0)
 		{

@@ -26,14 +26,14 @@ int exe_comd(char *input, char *av[])
 
 		break_exec(argv, tok_str, j, exit_s);
 
-		if ((strcmp(argv[0], "setenv") == 0) ||
-		(strcmp(argv[0], "unsetenv") == 0))
+		if ((_strcmp(argv[0], "setenv") == 0) ||
+		(_strcmp(argv[0], "unsetenv") == 0))
 		{
 			exec_env(argv);
 			i++;
 			continue;
 		}
-		else if (strcmp(argv[0], "cd") == 0)
+		else if (_strcmp(argv[0], "cd") == 0)
 		{
 			change_d(argv[1]);
 			i++;
@@ -63,7 +63,7 @@ void break_exec(char *argv[], char *tok_str, int j, int exit_s)
 	}
 	argv[j] = NULL;
 
-	if (strcmp(argv[0], "exit") == 0 && argv[1] != NULL)
+	if (_strcmp(argv[0], "exit") == 0 && argv[1] != NULL)
 	{
 		exit_s = atoi(argv[1]);
 		exit(exit_s);

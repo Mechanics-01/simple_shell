@@ -33,4 +33,11 @@ void check_non_interactive(char *line_buff, int ac, char *av[], char *envp[]);
 void check_buff(char *line_buff, char *av[], char *envp[]);
 void break_exec(char *argv[], char *tok_str, int j, int exit_s);
 
+int _strcmp(char *a, char *b);
+char *_strdup(const char *source);
+char *_strcpy(char *dest, const char *loc);
+int _strlen(const char *str);
+int _strncmp(const char *a, const char *b, size_t n);
+char *_strcat(char *dest, char *loc);
+
 #endif/*SHELL_H*/

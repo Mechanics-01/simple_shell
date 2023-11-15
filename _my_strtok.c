@@ -21,7 +21,7 @@ char *my_strtoken(char *string, const char *target)
 	if (n_token == NULL || *n_token == '\0')
 		return (NULL);
 
-	target_len = strlen(target);
+	target_len = _strlen(target);
 	token = n_token;
 	targ_pos = NULL;
 

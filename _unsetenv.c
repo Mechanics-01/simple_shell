@@ -15,11 +15,11 @@ int _unsetenv(const char *name)
 		return (-1);
 
 	env_index = 0;
-	name_len = strlen(name);
+	name_len = _strlen(name);
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		if (strncmp(environ[i], name, name_len) == 0)
+		if (_strncmp(environ[i], name, name_len) == 0)
 		{
 			env_index = i;
 			break;

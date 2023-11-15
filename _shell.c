@@ -56,6 +56,7 @@ int main(int ac, char *av[], char *envp[])
 void check_non_interactive(char *line_buff, int ac, char *av[], char *envp[])
 {
 	int fd;
+	ssize_t line_len;
 
 	line_buff = malloc(BUFFER);
 	if (line_buff == NULL)
@@ -78,7 +79,11 @@ void check_non_interactive(char *line_buff, int ac, char *av[], char *envp[])
 
 	while ((_getline(&line_buff)) != -1)
 	{
-		line_buff[strcspn(line_buff, "\n")] = '\0';
+		line_len = _strlen(line_buff);
+		if (line_len > 0 && line_buff[line_len - 1] == '\n')
+		{
+			line_buff[line_len - 1] = '\0';
+		}
 		check_buff(line_buff, av, envp);
 	}
 
@@ -93,9 +98,9 @@ void check_non_interactive(char *line_buff, int ac, char *av[], char *envp[])
  */
 void check_buff(char *line_buff, char *av[], char *envp[])
 {
-	if (strcmp(line_buff, "exit") == 0)
+	if (_strcmp(line_buff, "exit") == 0)
 		exit(EXIT_SUCCESS);
-	else if (strcmp(line_buff, "env") == 0)
+	else if (_strcmp(line_buff, "env") == 0)
 		env(envp);
 	else
 		exe_comd(line_buff, av);

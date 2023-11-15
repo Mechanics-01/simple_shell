@@ -3,8 +3,8 @@
 /**
  * _getline - Custom getline function.
  * @line_buff: Pointer to the buffer where the line will be stored.
- * Return: The number of bytes read (including newline), or Eof
- * an error or end of file is reached.
+ * Return: The number of bytes read (including newline), or EOF
+ * if an error or end of file is reached.
  */
 ssize_t _getline(char **line_buff)
 {
@@ -41,8 +41,9 @@ ssize_t _getline(char **line_buff)
 	}
 	if (buff_size - line_len - 1 > 0)
 	{
+		for (i = 0; i < buff_size - line_len - 1; i++)
+			buff[i] = buff[i + line_len + 1];
 		buff_size -= (line_len + 1);
-		memmove(buff, buff + line_len + 1, buff_size);
 	}
 	else
 		buff_size = 0;

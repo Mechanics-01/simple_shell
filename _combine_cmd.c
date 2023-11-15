@@ -20,7 +20,7 @@ char **parse_commands(char *input)
 	tok_str = strtok(input, ";");
 	while (tok_str != NULL)
 	{
-		commands[i++] = strdup(tok_str);
+		commands[i++] = _strdup(tok_str);
 		tok_str = strtok(NULL, ";");
 	}
 

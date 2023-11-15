@@ -15,8 +15,8 @@ int _setenv(const char *name, const char *value, int overwrite)
 
 	if (name == NULL || name[0] == '\0')
 		return (-1);
-	name_len = strlen(name);
-	value_len = (value != NULL) ? strlen(value) : 0;
+	name_len = _strlen(name);
+	value_len = (value != NULL) ? _strlen(value) : 0;
 	env_len = name_len + value_len + 2;
 	new_env = malloc(env_len);
 	if (new_env == NULL)
@@ -30,7 +30,7 @@ int _setenv(const char *name, const char *value, int overwrite)
 	env_index = 0;
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		if (strncmp(environ[i], name, name_len) == 0)
+		if (_strncmp(environ[i], name, name_len) == 0)
 		{
 			env_index = i;
 			break;
