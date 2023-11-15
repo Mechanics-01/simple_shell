@@ -11,9 +11,13 @@ int main(int ac, char *av[], char *envp[])
 	ssize_t buff_out_len;
 	char *prompt = "$ ";
 	char *line_buff = NULL;
+	int interact = 1;
 	(void)ac;
 
-	if (isatty(STDIN_FILENO))
+	if (ac > 1)
+		interact = 0;
+
+	if (interact)
 	{
 		while (true)
 		{
