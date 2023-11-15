@@ -72,3 +72,29 @@ int _strncmp(const char *a, const char *b, size_t n)
 		return (*(unsigned char *)a - *(unsigned char *)b);
 	return (0);
 }
+
+/**
+ * reportError - Report an error to stderr and exit with failure status.
+ * @programName: The name of the program.
+ * @fileName: The name of the file associated with the error.
+ */
+void reportError(const char *programName, const char *fileName)
+{
+	const char *msg = programName;
+	int len = 0;
+
+	const char err[] = ": 1: ";
+	const char notFound[] = ": not found\n";
+	const char term = '\0';
+
+	while (msg[len] != '\0')
+		len++;
+
+	write(STDERR_FILENO, msg, len);
+	write(STDERR_FILENO, err, sizeof(err) - 1);
+	write(STDERR_FILENO, fileName, strlen(fileName));
+	write(STDERR_FILENO, notFound, sizeof(notFound) - 1);
+	write(STDERR_FILENO, &term, 1);
+
+	_exit(EXIT_FAILURE);
+}

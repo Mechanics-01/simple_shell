@@ -17,7 +17,7 @@ int main(int ac, char *av[], char *envp[])
 	{
 		while (true)
 		{
-			printf("%s", prompt);
+			write(STDOUT_FILENO, prompt, _strlen(prompt));
 			fflush(stdout);
 			line_buff = malloc(BUFFER);
 			if (line_buff == NULL)
