@@ -9,7 +9,7 @@
 int main(int ac, char *av[], char *envp[])
 {
 	ssize_t buff_out_len;
-	char *prompt = "Shell$ ";
+	char *prompt = "$ ";
 	char *line_buff = NULL;
 	(void)ac;
 
