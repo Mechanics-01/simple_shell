@@ -8,7 +8,7 @@
  */
 int main(int ac, char *av[], char *envp[])
 {
-	ssize_t buff_out_len;
+	ssize_t buff_out_len = 0;
 	char *prompt = "$ ";
 	char *line_buff = NULL;
 	(void)ac;
@@ -22,6 +22,7 @@ int main(int ac, char *av[], char *envp[])
 			line_buff = malloc(BUFFER);
 			if (line_buff == NULL)
 			{
+				free(line_buff);
 				perror("malloc");
 				exit(1);
 			}
@@ -34,7 +35,6 @@ int main(int ac, char *av[], char *envp[])
 			if (buff_out_len == -1)
 			{
 				perror("getline");
-				free(line_buff);
 				exit(1);
 			}
 			check_buff(line_buff, av, envp);
@@ -43,6 +43,7 @@ int main(int ac, char *av[], char *envp[])
 	}
 	else
 		check_non_interactive(line_buff, ac, av, envp);
+
 	return (0);
 }
 
@@ -59,10 +60,10 @@ void check_non_interactive(char *line_buff, int ac, char *av[], char *envp[])
 	ssize_t line_len;
 	int new_stdin;
 
-	line_buff = malloc(BUFFER);
 	if (line_buff == NULL)
 	{
 		perror("malloc");
+		free(line_buff);
 		exit(EXIT_FAILURE);
 	}
 	if (ac > 1)
@@ -80,9 +81,8 @@ void check_non_interactive(char *line_buff, int ac, char *av[], char *envp[])
 			perror("open");
 			exit(EXIT_FAILURE);
 		}
-	close(fd);
+		close(fd);
 	}
-
 	while ((_getline(&line_buff)) != -1)
 	{
 		line_len = _strlen(line_buff);
@@ -92,7 +92,6 @@ void check_non_interactive(char *line_buff, int ac, char *av[], char *envp[])
 		}
 		check_buff(line_buff, av, envp);
 	}
-
 	free(line_buff);
 }
 
@@ -105,7 +104,10 @@ void check_non_interactive(char *line_buff, int ac, char *av[], char *envp[])
 void check_buff(char *line_buff, char *av[], char *envp[])
 {
 	if (_strcmp(line_buff, "exit") == 0)
+	{
+		free(line_buff);
 		exit(EXIT_SUCCESS);
+	}
 	else if (_strcmp(line_buff, "env") == 0)
 		env(envp);
 	else

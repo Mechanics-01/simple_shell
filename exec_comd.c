@@ -8,7 +8,7 @@
  */
 int exe_comd(char *input, char *av[])
 {
-	int i = 0;
+	int i = 0, j = 0;
 	char **commands = parse_commands(input);
 
 	while (commands[i] != NULL)
@@ -20,6 +20,7 @@ int exe_comd(char *input, char *av[])
 
 		if (tok_str == NULL)
 		{
+			free(commands[i]);
 			i++;
 			continue;
 		}
@@ -42,6 +43,8 @@ int exe_comd(char *input, char *av[])
 		path_exec(argv, av, input);
 		i++;
 	}
+	for (j = 0; j < i; j++)
+		free(commands[j]);
 	free(commands);
 	return (0);
 }

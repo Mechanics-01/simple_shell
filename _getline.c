@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * _getline - Custom getline function.
  * @line_buff: Pointer to the buffer where the line will be stored.
@@ -10,8 +9,7 @@ ssize_t _getline(char **line_buff)
 {
 	static ssize_t buff_size = -1;
 	static char buff[BUFFER];
-	ssize_t line_len = 0;
-	ssize_t i;
+	ssize_t line_len = 0, i = 0;
 
 	if (buff_size <= 0 || buff[buff_size - 1] == '\0')
 	{
@@ -30,6 +28,7 @@ ssize_t _getline(char **line_buff)
 	*line_buff = malloc(line_len + 1);
 	if (*line_buff == NULL)
 	{
+		free(*line_buff);
 		perror("malloc");
 		exit(1);
 	}

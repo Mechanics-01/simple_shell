@@ -14,6 +14,7 @@ char **parse_commands(char *input)
 	if (commands == NULL)
 	{
 		perror("malloc");
+		free(commands);
 		exit(1);
 	}
 
