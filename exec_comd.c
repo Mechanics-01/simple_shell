@@ -110,7 +110,10 @@ void path_exec(char *argv[], char *av[], char *input)
 	else
 	{
 		if (isatty(STDIN_FILENO) == 0)
-			reportError(av[0], argv[0]);
+		{
+			fprintf(stderr, "%s: %d: %s: %s\n", av[0], 1, argv[0], "not found");
+			_exit(127);
+		}
 		perror(av[0]);
 	}
 }

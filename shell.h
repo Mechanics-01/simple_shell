@@ -39,6 +39,5 @@ int _strlen(const char *str);
 int _strncmp(const char *a, const char *b, size_t n);
 char *_strcat(char *dest, char *loc);
 int _atoi(const char *str);
-void reportError(const char *programName, const char *fileName);
 
 #endif/*SHELL_H*/
