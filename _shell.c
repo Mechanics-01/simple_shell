@@ -19,13 +19,6 @@ int main(int ac, char *av[], char *envp[])
 		{
 			write(STDOUT_FILENO, prompt, _strlen(prompt));
 			fflush(stdout);
-			line_buff = malloc(BUFFER);
-			if (line_buff == NULL)
-			{
-				free(line_buff);
-				perror("malloc");
-				exit(1);
-			}
 			buff_out_len = _getline(&line_buff);
 			if (buff_out_len == EOF)
 			{
@@ -35,6 +28,7 @@ int main(int ac, char *av[], char *envp[])
 			if (buff_out_len == -1)
 			{
 				perror("getline");
+				free(line_buff);
 				exit(1);
 			}
 			check_buff(line_buff, av, envp);
@@ -60,12 +54,6 @@ void check_non_interactive(char *line_buff, int ac, char *av[], char *envp[])
 	ssize_t line_len;
 	int new_stdin;
 
-	if (line_buff == NULL)
-	{
-		perror("malloc");
-		free(line_buff);
-		exit(EXIT_FAILURE);
-	}
 	if (ac > 1)
 	{
 		fd = open(av[1], O_RDONLY);
@@ -78,6 +66,7 @@ void check_non_interactive(char *line_buff, int ac, char *av[], char *envp[])
 		new_stdin = open(av[1], O_RDONLY);
 		if (new_stdin == -1)
 		{
+			free(line_buff);
 			perror("open");
 			exit(EXIT_FAILURE);
 		}
