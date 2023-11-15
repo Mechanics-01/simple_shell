@@ -65,7 +65,7 @@ void break_exec(char *argv[], char *tok_str, int j, int exit_s)
 
 	if (_strcmp(argv[0], "exit") == 0 && argv[1] != NULL)
 	{
-		exit_s = atoi(argv[1]);
+		exit_s = _atoi(argv[1]);
 		exit(exit_s);
 	}
 }

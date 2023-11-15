@@ -38,5 +38,6 @@ char *_strcpy(char *dest, const char *loc);
 int _strlen(const char *str);
 int _strncmp(const char *a, const char *b, size_t n);
 char *_strcat(char *dest, char *loc);
+int _atoi(const char *str);
 
 #endif/*SHELL_H*/

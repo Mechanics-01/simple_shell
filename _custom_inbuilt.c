@@ -77,23 +77,3 @@ int _strlen(const char *str)
 
 	return (len);
 }
-
-/**
- * _strncmp - Compare up to n characters of two strings.
- * @a: The first string.
- * @b: The second string.
- * @n: The maximum number of characters to compare.
- * Return: 0 if the strings are equal, a negative
- */
-int _strncmp(const char *a, const char *b, size_t n)
-{
-	while (n > 0 && *a && *b && (*a == *b))
-	{
-		a++;
-		b++;
-		n--;
-	}
-	if (n > 0)
-		return (*(unsigned char *)a - *(unsigned char *)b);
-	return (0);
-}
