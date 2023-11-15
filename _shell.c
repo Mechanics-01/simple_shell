@@ -66,7 +66,6 @@ void check_non_interactive(char *line_buff, int ac, char *av[], char *envp[])
 		new_stdin = open(av[1], O_RDONLY);
 		if (new_stdin == -1)
 		{
-			free(line_buff);
 			perror("open");
 			exit(EXIT_FAILURE);
 		}

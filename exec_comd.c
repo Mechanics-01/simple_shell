@@ -20,7 +20,6 @@ int exe_comd(char *input, char *av[])
 
 		if (tok_str == NULL)
 		{
-			free(commands[i]);
 			i++;
 			continue;
 		}
