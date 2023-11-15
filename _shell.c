@@ -57,6 +57,7 @@ void check_non_interactive(char *line_buff, int ac, char *av[], char *envp[])
 {
 	int fd;
 	ssize_t line_len;
+	int new_stdin;
 
 	line_buff = malloc(BUFFER);
 	if (line_buff == NULL)
@@ -64,7 +65,6 @@ void check_non_interactive(char *line_buff, int ac, char *av[], char *envp[])
 		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
-
 	if (ac > 1)
 	{
 		fd = open(av[1], O_RDONLY);
@@ -73,8 +73,14 @@ void check_non_interactive(char *line_buff, int ac, char *av[], char *envp[])
 			perror("open");
 			exit(EXIT_FAILURE);
 		}
-		dup2(fd, STDIN_FILENO);
-		close(fd);
+		close(STDIN_FILENO);
+		new_stdin = open(av[1], O_RDONLY);
+		if (new_stdin == -1)
+		{
+			perror("open");
+			exit(EXIT_FAILURE);
+		}
+	close(fd);
 	}
 
 	while ((_getline(&line_buff)) != -1)
@@ -105,5 +111,3 @@ void check_buff(char *line_buff, char *av[], char *envp[])
 	else
 		exe_comd(line_buff, av);
 }
-
-
