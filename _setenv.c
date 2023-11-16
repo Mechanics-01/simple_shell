@@ -20,7 +20,10 @@ int _setenv(const char *name, const char *value, int overwrite)
 	env_len = name_len + value_len + 2;
 	new_env = malloc(env_len);
 	if (new_env == NULL)
+	{
+		free(new_env);
 		return (-1);
+	}
 	for (i = 0; i < name_len; i++)
 		new_env[i] = name[i];
 	new_env[name_len] = '=';
@@ -37,6 +40,7 @@ int _setenv(const char *name, const char *value, int overwrite)
 		}
 	}
 	check_env(env_index, overwrite, new_env);
+	free(new_env);
 	return (0);
 }
 
