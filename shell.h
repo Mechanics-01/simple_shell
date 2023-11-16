@@ -10,7 +10,7 @@
 #include <stdbool.h>
 #include <fcntl.h>
 
-#define BUFFER 1050
+#define BUFFER 10500
 #define COMMAND_SIZE 100
 extern char **environ;
 
@@ -19,7 +19,6 @@ char *location(char *path, char *arg);
 char *get_loc(char *arg);
 int env(char *envp[]);
 ssize_t _getline(char **line_buff);
-char *my_strtoken(char *string, const char *target);
 void exec_env(char *argv[]);
 void change_d(char *d);
 char *_getenv(const char *name);
